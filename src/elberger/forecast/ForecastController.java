@@ -90,7 +90,7 @@ public class ForecastController
 		//can't all be zero or use time to display...?
 		//set icon
 		hourlyDesc.setText(info.get(0).getWeather().getDescription());
-		hourlyHigh.setText(String.valueOf(info.get(0).getMain().getTemp_max()));
+		hourlyHigh.setText(String.valueOf(info.get(0).getMain().));
 		hourlyLow.setText(String.valueOf(info.get(0).getMain().getTemp_min()));
 	}
 }
