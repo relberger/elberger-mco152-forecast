@@ -1,7 +1,6 @@
 package elberger.forecast;
 
-public class ForecastDetails
+public class ForecastMain
 {
-	
 
 }
