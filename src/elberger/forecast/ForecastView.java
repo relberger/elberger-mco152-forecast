@@ -2,6 +2,10 @@ package elberger.forecast;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ForecastView extends JFrame
 {
@@ -56,58 +60,101 @@ public class ForecastView extends JFrame
 		userZip = new JTextField();
 		JButton search = new JButton("Search");
 		
+		search.addActionListener(e ->
+		{
+			Retrofit retrofit = new Retrofit.Builder()
+					.baseUrl("http://api.openweathermap.org")
+					.addConverterFactory(GsonConverterFactory.create())
+					.build();
+			
+			ForecastService service = retrofit.create(ForecastService.class);
+			ForecastController controller = new ForecastController(this, service);
+			controller.requestForecast1();
+			controller.requestForecast2();
+			controller.requestForecast3();
+			controller.requestForecast4();
+			controller.requestForecast5();
+			controller.requestForecast6();
+			controller.requestForecast7();
+			controller.requestForecast8();
+		});
+		
 		zipPanel.add(enterZip);
 		zipPanel.add(userZip);
 		zipPanel.add(search);
 		panel.add(zipPanel, BorderLayout.NORTH);
 		
 		JPanel hourly1 = new JPanel();
-		hourly1.setLayout(new BoxLayout(hourly1, BoxLayout.Y_AXIS));	
+		hourly1.setLayout(new BoxLayout(hourly1, BoxLayout.Y_AXIS));
+		hourly1Desc = new JLabel();
+		hourly1High = new JLabel();
+		hourly1Low = new JLabel();
 		hourly1.add(hourly1Desc);
 		hourly1.add(hourly1High);
 		hourly1.add(hourly1Low);
 		
 		JPanel hourly2 = new JPanel();
 		hourly2.setLayout(new BoxLayout(hourly2, BoxLayout.Y_AXIS));
-		hourly1.add(hourly2Desc);
-		hourly1.add(hourly2High);
-		hourly1.add(hourly2Low);	
+		hourly2Desc = new JLabel();
+		hourly2High = new JLabel();
+		hourly2Low = new JLabel();
+		hourly2.add(hourly2Desc);
+		hourly2.add(hourly2High);
+		hourly2.add(hourly2Low);	
 		
 		JPanel hourly3 = new JPanel();
 		hourly3.setLayout(new BoxLayout(hourly3, BoxLayout.Y_AXIS));	
-		hourly1.add(hourly3Desc);
-		hourly1.add(hourly3High);
-		hourly1.add(hourly3Low);
+		hourly3Desc = new JLabel();
+		hourly3High = new JLabel();
+		hourly3Low = new JLabel();
+		hourly3.add(hourly3Desc);
+		hourly3.add(hourly3High);
+		hourly3.add(hourly3Low);
 		
 		JPanel hourly4 = new JPanel();
 		hourly4.setLayout(new BoxLayout(hourly4, BoxLayout.Y_AXIS));	
-		hourly1.add(hourly4Desc);
-		hourly1.add(hourly4High);
-		hourly1.add(hourly4Low);
+		hourly4Desc = new JLabel();
+		hourly4High = new JLabel();
+		hourly4Low = new JLabel();
+		hourly4.add(hourly4Desc);
+		hourly4.add(hourly4High);
+		hourly4.add(hourly4Low);
 		
 		JPanel hourly5 = new JPanel();
 		hourly5.setLayout(new BoxLayout(hourly5, BoxLayout.Y_AXIS));	
-		hourly1.add(hourly5Desc);
-		hourly1.add(hourly5High);
-		hourly1.add(hourly5Low);
+		hourly5Desc = new JLabel();
+		hourly5High = new JLabel();
+		hourly5Low = new JLabel();
+		hourly5.add(hourly5Desc);
+		hourly5.add(hourly5High);
+		hourly5.add(hourly5Low);
 		
 		JPanel hourly6 = new JPanel();
 		hourly6.setLayout(new BoxLayout(hourly6, BoxLayout.Y_AXIS));
-		hourly1.add(hourly6Desc);
-		hourly1.add(hourly6High);
-		hourly1.add(hourly6Low);	
+		hourly6Desc = new JLabel();
+		hourly6High = new JLabel();
+		hourly6Low = new JLabel();
+		hourly6.add(hourly6Desc);
+		hourly6.add(hourly6High);
+		hourly6.add(hourly6Low);	
 
 		JPanel hourly7 = new JPanel();
 		hourly7.setLayout(new BoxLayout(hourly7, BoxLayout.Y_AXIS));	
-		hourly1.add(hourly7Desc);
-		hourly1.add(hourly7High);
-		hourly1.add(hourly7Low);
+		hourly7Desc = new JLabel();
+		hourly7High = new JLabel();
+		hourly7Low = new JLabel();
+		hourly7.add(hourly7Desc);
+		hourly7.add(hourly7High);
+		hourly7.add(hourly7Low);
 		
 		JPanel hourly8 = new JPanel();
 		hourly8.setLayout(new BoxLayout(hourly8, BoxLayout.Y_AXIS));
-		hourly1.add(hourly8Desc);
-		hourly1.add(hourly8High);
-		hourly1.add(hourly8Low);
+		hourly8Desc = new JLabel();
+		hourly8High = new JLabel();
+		hourly8Low = new JLabel();
+		hourly8.add(hourly8Desc);
+		hourly8.add(hourly8High);
+		hourly8.add(hourly8Low);
 		
 		
 		
@@ -127,9 +174,9 @@ public class ForecastView extends JFrame
 		add(panel);
 	}
 
-	public JTextField getUserZip()
+	public String getUserZip()
 	{
-		return userZip;
+		return userZip.getText();
 	}
 
 	public Image getHourly1Icon()

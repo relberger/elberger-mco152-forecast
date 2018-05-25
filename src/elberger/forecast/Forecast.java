@@ -3,18 +3,19 @@ package elberger.forecast;
 public class Forecast
 {
 	private ForecastWeather weather;
+	private ForecastMainList mainList;
 	private ForecastMain main;
 	private String dt_txt;
 	
-	public Forecast(String description, String icon, double temp_min, double temp_max)
+	public Forecast(String description, String icon, ForecastMainList mainList)
 	{
 		weather = new ForecastWeather(description, icon);
-		main = new ForecastMain(temp_min, temp_max);
+		this.mainList = mainList;
 	}
 
-	public ForecastMain getMain()
+	public ForecastMainList getMain()
 	{
-		return main;
+		return mainList;
 	}
 
 	public ForecastWeather getWeather()
