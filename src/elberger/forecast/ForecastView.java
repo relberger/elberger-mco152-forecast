@@ -1,9 +1,9 @@
-package elberger.weather;
+package elberger.forecast;
 
 import java.awt.*;
 import javax.swing.*;
 
-public class WeatherView extends JFrame
+public class ForecastView extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JTextField userZip;
@@ -40,7 +40,7 @@ public class WeatherView extends JFrame
 	private JLabel hourly8High;
 	private JLabel hourly8Low;
 	
-	public WeatherView()
+	public ForecastView()
 	{
 		setTitle("Weather");
 		setSize(600, 300);
@@ -294,6 +294,6 @@ public class WeatherView extends JFrame
 
 	public static void main(String[] args)
 	{
-		new WeatherView().setVisible(true);
+		new ForecastView().setVisible(true);
 	}
 }
