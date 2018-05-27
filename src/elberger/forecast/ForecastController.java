@@ -112,8 +112,8 @@ public class ForecastController
 		}
 
 		//set icon
-		
-		hourlyDesc.setText(info.get(ii).getDescription());
+		ForecastWeather weather[] = info.get(ii).getWeather();
+		hourlyDesc.setText(weather[0].getDescription());
 		hourlyHigh.setText("High: " + String.valueOf(info.get(ii).getMain().getTemp_max()) + "°F");
 		hourlyLow.setText("Low: " + String.valueOf(info.get(ii).getMain().getTemp_min()) + "°F");
 	}

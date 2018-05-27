@@ -55,7 +55,7 @@ public class ForecastView extends JFrame
 	public ForecastView()
 	{
 		setTitle("Weather");
-		setSize(600, 300);
+		setSize(900, 300);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
