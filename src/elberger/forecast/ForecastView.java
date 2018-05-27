@@ -2,8 +2,6 @@ package elberger.forecast;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -11,46 +9,46 @@ public class ForecastView extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JTextField userZip;
-	private JLabel hourly1Time;
-	private Image hourly1Icon;
-	private JLabel hourly1Desc;
-	private JLabel hourly1High;
-	private JLabel hourly1Low;
-	private JLabel hourly2Time;
-	private Image hourly2Icon;
-	private JLabel hourly2Desc;
-	private JLabel hourly2High;
-	private JLabel hourly2Low;
-	private JLabel hourly3Time;
-	private Image hourly3Icon;
-	private JLabel hourly3Desc;
-	private JLabel hourly3High;
-	private JLabel hourly3Low;
-	private JLabel hourly4Time;
-	private Image hourly4Icon;
-	private JLabel hourly4Desc;
-	private JLabel hourly4High;
-	private JLabel hourly4Low;
-	private JLabel hourly5Time;
-	private Image hourly5Icon;
-	private JLabel hourly5Desc;
-	private JLabel hourly5High;
-	private JLabel hourly5Low;
-	private JLabel hourly6Time;
-	private Image hourly6Icon;
-	private JLabel hourly6Desc;
-	private JLabel hourly6High;
-	private JLabel hourly6Low;
-	private JLabel hourly7Time;
-	private Image hourly7Icon;
-	private JLabel hourly7Desc;
-	private JLabel hourly7High;
-	private JLabel hourly7Low;
-	private JLabel hourly8Time;
-	private Image hourly8Icon;
-	private JLabel hourly8Desc;
-	private JLabel hourly8High;
-	private JLabel hourly8Low;
+	private JLabel time1;
+	private JLabel icon1;
+	private JLabel desc1;
+	private JLabel high1;
+	private JLabel low1;
+	private JLabel time2;
+	private JLabel icon2;
+	private JLabel desc2;
+	private JLabel high2;
+	private JLabel low2;
+	private JLabel time3;
+	private JLabel icon3;
+	private JLabel desc3;
+	private JLabel high3;
+	private JLabel low3;
+	private JLabel time4;
+	private JLabel icon4;
+	private JLabel desc4;
+	private JLabel high4;
+	private JLabel low4;
+	private JLabel time5;
+	private JLabel icon5;
+	private JLabel desc5;
+	private JLabel high5;
+	private JLabel low5;
+	private JLabel time6;
+	private JLabel icon6;
+	private JLabel desc6;
+	private JLabel high6;
+	private JLabel low6;
+	private JLabel time7;
+	private JLabel icon7;
+	private JLabel desc7;
+	private JLabel high7;
+	private JLabel low7;
+	private JLabel time8;
+	private JLabel icon8;
+	private JLabel desc8;
+	private JLabel high8;
+	private JLabel low8;
 	
 	public ForecastView()
 	{
@@ -64,7 +62,7 @@ public class ForecastView extends JFrame
 		JPanel zipPanel = new JPanel();
 		zipPanel.setLayout(new BoxLayout(zipPanel, BoxLayout.X_AXIS));
 		
-		JLabel enterZip = new JLabel("Enter zip code for weather in next 24 hours: ");
+		JLabel enterZip = new JLabel("Enter zip code for weather in the next 24 hours: ");
 		userZip = new JTextField();
 		JButton search = new JButton("Search");
 		
@@ -94,91 +92,107 @@ public class ForecastView extends JFrame
 		
 		JPanel hourly1 = new JPanel();
 		hourly1.setLayout(new BoxLayout(hourly1, BoxLayout.Y_AXIS));
-		hourly1Time = new JLabel();
-		hourly1Desc = new JLabel();
-		hourly1High = new JLabel();
-		hourly1Low = new JLabel();
-		hourly1.add(hourly1Time);
-		hourly1.add(hourly1Desc);
-		hourly1.add(hourly1High);
-		hourly1.add(hourly1Low);
+		time1 = new JLabel();
+		icon1 = new JLabel();
+		desc1 = new JLabel();
+		high1 = new JLabel();
+		low1 = new JLabel();
+		hourly1.add(time1);
+		hourly1.add(icon1);
+		hourly1.add(desc1);
+		hourly1.add(high1);
+		hourly1.add(low1);
 		
 		JPanel hourly2 = new JPanel();
 		hourly2.setLayout(new BoxLayout(hourly2, BoxLayout.Y_AXIS));
-		hourly2Time = new JLabel();
-		hourly2Desc = new JLabel();
-		hourly2High = new JLabel();
-		hourly2Low = new JLabel();
-		hourly2.add(hourly2Time);
-		hourly2.add(hourly2Desc);
-		hourly2.add(hourly2High);
-		hourly2.add(hourly2Low);	
+		time2 = new JLabel();
+		icon2 = new JLabel();
+		desc2 = new JLabel();
+		high2 = new JLabel();
+		low2 = new JLabel();
+		hourly2.add(time2);
+		hourly2.add(icon2);
+		hourly2.add(desc2);
+		hourly2.add(high2);
+		hourly2.add(low2);	
 		
 		JPanel hourly3 = new JPanel();
 		hourly3.setLayout(new BoxLayout(hourly3, BoxLayout.Y_AXIS));	
-		hourly3Time = new JLabel();
-		hourly3Desc = new JLabel();
-		hourly3High = new JLabel();
-		hourly3Low = new JLabel();
-		hourly3.add(hourly3Time);
-		hourly3.add(hourly3Desc);
-		hourly3.add(hourly3High);
-		hourly3.add(hourly3Low);
+		time3 = new JLabel();
+		icon3 = new JLabel();
+		desc3 = new JLabel();
+		high3 = new JLabel();
+		low3 = new JLabel();
+		hourly3.add(time3);
+		hourly3.add(icon3);
+		hourly3.add(desc3);
+		hourly3.add(high3);
+		hourly3.add(low3);
 		
 		JPanel hourly4 = new JPanel();
 		hourly4.setLayout(new BoxLayout(hourly4, BoxLayout.Y_AXIS));	
-		hourly4Time = new JLabel();
-		hourly4Desc = new JLabel();
-		hourly4High = new JLabel();
-		hourly4Low = new JLabel();
-		hourly4.add(hourly4Time);
-		hourly4.add(hourly4Desc);
-		hourly4.add(hourly4High);
-		hourly4.add(hourly4Low);
+		time4 = new JLabel();
+		icon4 = new JLabel();
+		desc4 = new JLabel();
+		high4 = new JLabel();
+		low4 = new JLabel();
+		hourly4.add(time4);
+		hourly4.add(icon4);
+		hourly4.add(desc4);
+		hourly4.add(high4);
+		hourly4.add(low4);
 		
 		JPanel hourly5 = new JPanel();
 		hourly5.setLayout(new BoxLayout(hourly5, BoxLayout.Y_AXIS));	
-		hourly5Time = new JLabel();
-		hourly5Desc = new JLabel();
-		hourly5High = new JLabel();
-		hourly5Low = new JLabel();
-		hourly5.add(hourly5Time);
-		hourly5.add(hourly5Desc);
-		hourly5.add(hourly5High);
-		hourly5.add(hourly5Low);
+		time5 = new JLabel();
+		icon5 = new JLabel();
+		desc5 = new JLabel();
+		high5 = new JLabel();
+		low5 = new JLabel();
+		hourly5.add(time5);
+		hourly5.add(icon5);
+		hourly5.add(desc5);
+		hourly5.add(high5);
+		hourly5.add(low5);
 		
 		JPanel hourly6 = new JPanel();
 		hourly6.setLayout(new BoxLayout(hourly6, BoxLayout.Y_AXIS));
-		hourly6Time = new JLabel();
-		hourly6Desc = new JLabel();
-		hourly6High = new JLabel();
-		hourly6Low = new JLabel();
-		hourly6.add(hourly6Time);
-		hourly6.add(hourly6Desc);
-		hourly6.add(hourly6High);
-		hourly6.add(hourly6Low);	
+		time6 = new JLabel();
+		icon6 = new JLabel();
+		desc6 = new JLabel();
+		high6 = new JLabel();
+		low6 = new JLabel();
+		hourly6.add(time6);
+		hourly6.add(icon6);
+		hourly6.add(desc6);
+		hourly6.add(high6);
+		hourly6.add(low6);	
 
 		JPanel hourly7 = new JPanel();
 		hourly7.setLayout(new BoxLayout(hourly7, BoxLayout.Y_AXIS));	
-		hourly7Time = new JLabel();
-		hourly7Desc = new JLabel();
-		hourly7High = new JLabel();
-		hourly7Low = new JLabel();
-		hourly7.add(hourly7Time);
-		hourly7.add(hourly7Desc);
-		hourly7.add(hourly7High);
-		hourly7.add(hourly7Low);
+		time7 = new JLabel();
+		icon7 = new JLabel();
+		desc7 = new JLabel();
+		high7 = new JLabel();
+		low7 = new JLabel();
+		hourly7.add(time7);
+		hourly7.add(icon7);
+		hourly7.add(desc7);
+		hourly7.add(high7);
+		hourly7.add(low7);
 		
 		JPanel hourly8 = new JPanel();
 		hourly8.setLayout(new BoxLayout(hourly8, BoxLayout.Y_AXIS));
-		hourly8Time = new JLabel();
-		hourly8Desc = new JLabel();
-		hourly8High = new JLabel();
-		hourly8Low = new JLabel();
-		hourly8.add(hourly8Time);
-		hourly8.add(hourly8Desc);
-		hourly8.add(hourly8High);
-		hourly8.add(hourly8Low);
+		time8 = new JLabel();
+		icon8 = new JLabel();
+		desc8 = new JLabel();
+		high8 = new JLabel();
+		low8 = new JLabel();
+		hourly8.add(time8);
+		hourly8.add(icon8);
+		hourly8.add(desc8);
+		hourly8.add(high8);
+		hourly8.add(low8);
 		
 		
 		
@@ -203,204 +217,204 @@ public class ForecastView extends JFrame
 		return userZip.getText();
 	}
 
-	public JLabel getHourly1Time()
+	public JLabel getTime1()
 	{
-		return hourly1Time;
+		return time1;
 	}
 	
-	public Image getHourly1Icon()
+	public JLabel getIcon1()
 	{
-		return hourly1Icon;
+		return icon1;
 	}
 
-	public JLabel getHourly1Desc()
+	public JLabel getDesc1()
 	{
-		return hourly1Desc;
+		return desc1;
 	}
 
-	public JLabel getHourly1High()
+	public JLabel getHigh1()
 	{
-		return hourly1High;
+		return high1;
 	}
 
-	public JLabel getHourly1Low()
+	public JLabel getLow1()
 	{
-		return hourly1Low;
+		return low1;
 	}
 
-	public JLabel getHourly2Time()
+	public JLabel getTime2()
 	{
-		return hourly2Time;
+		return time2;
 	}
 
-	public Image getHourly2Icon()
+	public JLabel getIcon2()
 	{
-		return hourly2Icon;
+		return icon2;
 	}
 
-	public JLabel getHourly2Desc()
+	public JLabel getDesc2()
 	{
-		return hourly2Desc;
+		return desc2;
 	}
 
-	public JLabel getHourly2High()
+	public JLabel getHigh2()
 	{
-		return hourly2High;
+		return high2;
 	}
 
-	public JLabel getHourly2Low()
+	public JLabel getLow2()
 	{
-		return hourly2Low;
+		return low2;
 	}
 
-	public JLabel getHourly3Time()
+	public JLabel getTime3()
 	{
-		return hourly3Time;
+		return time3;
 	}
 	
-	public Image getHourly3Icon()
+	public JLabel getIcon3()
 	{
-		return hourly3Icon;
+		return icon3;
 	}
 
-	public JLabel getHourly3Desc()
+	public JLabel getDesc3()
 	{
-		return hourly3Desc;
+		return desc3;
 	}
 
-	public JLabel getHourly3High()
+	public JLabel getHigh3()
 	{
-		return hourly3High;
+		return high3;
 	}
 
-	public JLabel getHourly3Low()
+	public JLabel getLow3()
 	{
-		return hourly3Low;
+		return low3;
 	}
 
-	public JLabel getHourly4Time()
+	public JLabel getTime4()
 	{
-		return hourly4Time;
+		return time4;
 	}
 
-	public Image getHourly4Icon()
+	public JLabel getIcon4()
 	{
-		return hourly4Icon;
+		return icon4;
 	}
 
-	public JLabel getHourly4Desc()
+	public JLabel getDesc4()
 	{
-		return hourly4Desc;
+		return desc4;
 	}
 
-	public JLabel getHourly4High()
+	public JLabel getHigh4()
 	{
-		return hourly4High;
+		return high4;
 	}
 
-	public JLabel getHourly4Low()
+	public JLabel getLow4()
 	{
-		return hourly4Low;
+		return low4;
 	}
 
-	public JLabel getHourly5Time()
+	public JLabel getTime5()
 	{
-		return hourly5Time;
+		return time5;
 	}
 
-	public Image getHourly5Icon()
+	public JLabel getIcon5()
 	{
-		return hourly5Icon;
+		return icon5;
 	}
 
-	public JLabel getHourly5Desc()
+	public JLabel getDesc5()
 	{
-		return hourly5Desc;
+		return desc5;
 	}
 
-	public JLabel getHourly5High()
+	public JLabel getHigh5()
 	{
-		return hourly5High;
+		return high5;
 	}
 
-	public JLabel getHourly5Low()
+	public JLabel getLow5()
 	{
-		return hourly5Low;
+		return low5;
 	}
 
-	public JLabel getHourly6Time()
+	public JLabel getTime6()
 	{
-		return hourly6Time;
+		return time6;
 	}
 
-	public Image getHourly6Icon()
+	public JLabel getIcon6()
 	{
-		return hourly6Icon;
+		return icon6;
 	}
 
-	public JLabel getHourly6Desc()
+	public JLabel getDesc6()
 	{
-		return hourly6Desc;
+		return desc6;
 	}
 
-	public JLabel getHourly6High()
+	public JLabel getHigh6()
 	{
-		return hourly6High;
+		return high6;
 	}
 
-	public JLabel getHourly6Low()
+	public JLabel getLow6()
 	{
-		return hourly6Low;
+		return low6;
 	}
 
-	public JLabel getHourly7Time()
+	public JLabel getTime7()
 	{
-		return hourly7Time;
+		return time7;
 	}
 
-	public Image getHourly7Icon()
+	public JLabel getIcon7()
 	{
-		return hourly7Icon;
+		return icon7;
 	}
 
-	public JLabel getHourly7Desc()
+	public JLabel getDesc7()
 	{
-		return hourly7Desc;
+		return desc7;
 	}
 
-	public JLabel getHourly7High()
+	public JLabel getHigh7()
 	{
-		return hourly7High;
+		return high7;
 	}
 
-	public JLabel getHourly7Low()
+	public JLabel getLow7()
 	{
-		return hourly7Low;
+		return low7;
 	}
 
-	public JLabel getHourly8Time()
+	public JLabel getTime8()
 	{
-		return hourly8Time;
+		return time8;
 	}
 
-	public Image getHourly8Icon()
+	public JLabel getIcon8()
 	{
-		return hourly8Icon;
+		return icon8;
 	}
 
-	public JLabel getHourly8Desc()
+	public JLabel getDesc8()
 	{
-		return hourly8Desc;
+		return desc8;
 	}
 
-	public JLabel getHourly8High()
+	public JLabel getHigh8()
 	{
-		return hourly8High;
+		return high8;
 	}
 
-	public JLabel getHourly8Low()
+	public JLabel getLow8()
 	{
-		return hourly8Low;
+		return low8;
 	}
 
 	public static void main(String[] args)
