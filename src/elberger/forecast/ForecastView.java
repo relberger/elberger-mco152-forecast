@@ -64,7 +64,7 @@ public class ForecastView extends JFrame
 		JPanel zipPanel = new JPanel();
 		zipPanel.setLayout(new BoxLayout(zipPanel, BoxLayout.X_AXIS));
 		
-		JLabel enterZip = new JLabel("Enter zip code: ");
+		JLabel enterZip = new JLabel("Enter zip code for weather in next 24 hours: ");
 		userZip = new JTextField();
 		JButton search = new JButton("Search");
 		
