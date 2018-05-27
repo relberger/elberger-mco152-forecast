@@ -1,27 +1,26 @@
 package elberger.forecast;
 
-import java.util.List;
-
 public class Forecast
 {
-	private ForecastWeather weather;
-	//private ForecastMainArray mainArray;
-	private List<ForecastMain> main;
+	private ForecastWeather[] weather;
+	private ForecastMain main;
 	private String dt_txt;
-	
-	public Forecast(String description, String icon, /*ForecastMainArray mainArray*/List<ForecastMain> main, double temp_min, double temp_max)
+
+	public Forecast(String description, String icon, double temp_min, double temp_max)
 	{
-		weather = new ForecastWeather(description, icon);
-		this.main = main;
-		main = (List<ForecastMain>) new ForecastMain(temp_min, temp_max);
+		for (int ii = 0; ii < weather.length; ii++)
+		{
+			weather[ii] = new ForecastWeather(description, icon);
+		}
+		main = new ForecastMain(temp_min, temp_max);
 	}
 
-	public List<ForecastMain> getMain()
+	public ForecastMain getMain()
 	{
 		return main;
 	}
 
-	public ForecastWeather getWeather()
+	public ForecastWeather[] getWeather()
 	{
 		return weather;
 	}

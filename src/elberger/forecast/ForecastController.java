@@ -89,8 +89,9 @@ public class ForecastController
 		List<Forecast> info = feed.getList();
 		//can't all be zero or use time to display...?
 		//set icon
-		hourlyDesc.setText(info.get(0).getWeather().getDescription());
-		hourlyHigh.setText(String.valueOf(info.get(0).getMain().));
-		hourlyLow.setText(String.valueOf(info.get(0).getMain().getTemp_min()));
+		info.get(0).getWeather();
+		//hourlyDesc.setText(info.get(0).getWeather());
+		//hourlyHigh.setText(String.valueOf(info.get(0).getMain().));
+		//hourlyLow.setText(String.valueOf(info.get(0).getMain().getTemp_min()));
 	}
 }
