@@ -4,6 +4,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -31,7 +33,13 @@ public class ForecastController
 					{
 						ForecastFeedModel feed = response.body();
 						
-						showForecast(ii, feed, time, icon, desc, high, low);
+						try
+						{
+							showForecast(ii, feed, time, icon, desc, high, low);
+						} catch (MalformedURLException e)
+						{
+							e.printStackTrace();
+						}
 					}
 
 					@Override
@@ -83,8 +91,15 @@ public class ForecastController
 				view.getIcon8(), view.getDesc8(), view.getHigh8(), view.getLow8());
 	}
 	
-	void showForecast(int ii, ForecastFeedModel feed, JLabel time, JLabel icon, JLabel desc, JLabel high, JLabel low)
+	void showForecast(int ii, ForecastFeedModel feed, JLabel time, JLabel icon, JLabel desc, JLabel high, JLabel low) throws MalformedURLException
 	{
+		/*
+		 * 
+		 * 
+		 * input validation
+		 * 
+		 * 
+		 */
 		List<Forecast> info = feed.getList();
 		
 		String timeStamp = info.get(ii).getDt_txt();
@@ -114,7 +129,10 @@ public class ForecastController
 
 		ForecastWeather weather[] = info.get(ii).getWeather();
 		
-		ImageIcon image = new ImageIcon("http://openweathermap.org/img/w/" + weather[0].getIcon() + ".png");
+		
+		URL iconUrl = new URL("http://openweathermap.org/img/w/" + weather[0].getIcon() + ".png");
+		String description = weather[0].getDescription();
+		ImageIcon image = new ImageIcon(iconUrl, description);
 		icon.setIcon(image);
 		
 		desc.setText(weather[0].getDescription());
