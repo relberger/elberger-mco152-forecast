@@ -46,7 +46,7 @@ public class ForecastView extends JFrame
 			} catch (IOException e1)
 			{
 				e1.printStackTrace();
-			}*/
+			}*/ 
 		});
 		
 		zipPanel.add(enterZip);

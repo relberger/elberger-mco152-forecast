@@ -4,13 +4,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 public class ForecastController
 {
@@ -37,6 +35,10 @@ public class ForecastController
 						
 						try
 						{
+							if(response.errorBody() != null)
+							{
+								view.getUserZipField().setText("Please enter a valid zip code");
+							}
 							showForecast(feed);
 						} catch (MalformedURLException e)
 						{
@@ -54,11 +56,10 @@ public class ForecastController
 	
 	public void requestForecast()
 	{
-		requestForecastFeed(service.getWeatherByZip(view.getUserZip()));			
+		requestForecastFeed(service.getWeatherByZip(view.getUserZip().trim()));			
 	}	
 	
-	void showForecast(ForecastFeedModel feed) 
-			throws MalformedURLException
+	void showForecast(ForecastFeedModel feed) throws MalformedURLException
 	{
 		for(int ix = 0; ix < weatherPanels.size(); ix++)
 		{
@@ -104,22 +105,4 @@ public class ForecastController
 			weatherPanels.get(ix).getLow().setText("Low: " + String.valueOf(forecast.getMain().getTemp_min()) + "°F");
 		}
 	}
-	
-/*	public void zipValidation() throws IOException
-	{
-		Call <ForecastFeedModel> call = service.getWeatherByZip(view.getUserZip());
-		Response<ForecastFeedModel> response = call.execute();
-		
-		if(response.errorBody() != null)
-		{
-			view.getUserZipField().setText("Please enter a valid zip code");
-			clearAllFields();			
-		}
-	}
-
-	private void clearAllFields()
-	{
-		List<WeatherPanel> weatherPanel = view.getWeatherPanels();
-		weatherPanel.clear();
-	}*/
 }
