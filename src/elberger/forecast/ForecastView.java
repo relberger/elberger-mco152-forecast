@@ -1,6 +1,8 @@
 package elberger.forecast;
 
 import java.awt.*;
+import java.io.IOException;
+
 import javax.swing.*;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -53,7 +55,7 @@ public class ForecastView extends JFrame
 	public ForecastView()
 	{
 		setTitle("Weather");
-		setSize(900, 300);
+		setSize(900, 200);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -75,6 +77,13 @@ public class ForecastView extends JFrame
 			
 			ForecastService service = retrofit.create(ForecastService.class);
 			ForecastController controller = new ForecastController(this, service);
+			try
+			{
+				controller.zipValidation();
+			} catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
 			controller.requestForecast1();
 			controller.requestForecast2();
 			controller.requestForecast3();
@@ -217,6 +226,11 @@ public class ForecastView extends JFrame
 		return userZip.getText();
 	}
 
+	public JTextField getUserZipField()
+	{
+		return userZip;
+	}
+	
 	public JLabel getTime1()
 	{
 		return time1;

@@ -4,6 +4,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -93,13 +94,6 @@ public class ForecastController
 	
 	void showForecast(int ii, ForecastFeedModel feed, JLabel time, JLabel icon, JLabel desc, JLabel high, JLabel low) throws MalformedURLException
 	{
-		/*
-		 * 
-		 * 
-		 * input validation
-		 * 
-		 * 
-		 */
 		List<Forecast> info = feed.getList();
 		
 		String timeStamp = info.get(ii).getDt_txt();
@@ -129,10 +123,8 @@ public class ForecastController
 
 		ForecastWeather weather[] = info.get(ii).getWeather();
 		
-		
 		URL iconUrl = new URL("http://openweathermap.org/img/w/" + weather[0].getIcon() + ".png");
-		String description = weather[0].getDescription();
-		ImageIcon image = new ImageIcon(iconUrl, description);
+		ImageIcon image = new ImageIcon(iconUrl);
 		icon.setIcon(image);
 		
 		desc.setText(weather[0].getDescription());
@@ -140,5 +132,68 @@ public class ForecastController
 		high.setText("High: " + String.valueOf(info.get(ii).getMain().getTemp_max()) + "°F");
 		
 		low.setText("Low: " + String.valueOf(info.get(ii).getMain().getTemp_min()) + "°F");
+	}
+	
+	public void zipValidation() throws IOException
+	{
+		Call <ForecastFeedModel> call = service.addToUrl(view.getUserZip(), "c62a04efaf47575752e10468810ee065");
+		Response<ForecastFeedModel> response = call.execute();
+		
+		if(response.errorBody() != null)
+		{
+			view.getUserZipField().setText("Please enter a valid zip code");
+			clearAllFields();			
+		}
+	}
+
+	private void clearAllFields()
+	{
+		view.getTime1().setText("");
+		view.getIcon1().setIcon(null);
+		view.getDesc1().setText("");
+		view.getHigh1().setText("");
+		view.getLow1().setText("");		
+		
+		view.getTime2().setText("");
+		view.getIcon2().setIcon(null);
+		view.getDesc2().setText("");
+		view.getHigh2().setText("");
+		view.getLow2().setText("");
+		
+		view.getTime3().setText("");
+		view.getIcon3().setIcon(null);
+		view.getDesc3().setText("");
+		view.getHigh3().setText("");
+		view.getLow3().setText("");
+		
+		view.getTime4().setText("");
+		view.getIcon4().setIcon(null);
+		view.getDesc4().setText("");
+		view.getHigh4().setText("");
+		view.getLow4().setText("");
+		
+		view.getTime5().setText("");
+		view.getIcon5().setIcon(null);
+		view.getDesc5().setText("");
+		view.getHigh5().setText("");
+		view.getLow5().setText("");
+
+		view.getTime6().setText("");
+		view.getIcon6().setIcon(null);
+		view.getDesc6().setText("");
+		view.getHigh6().setText("");
+		view.getLow6().setText("");		
+
+		view.getTime7().setText("");
+		view.getIcon7().setIcon(null);
+		view.getDesc7().setText("");
+		view.getHigh7().setText("");
+		view.getLow7().setText("");			
+
+		view.getTime8().setText("");
+		view.getIcon8().setIcon(null);
+		view.getDesc8().setText("");
+		view.getHigh8().setText("");
+		view.getLow8().setText("");
 	}
 }
