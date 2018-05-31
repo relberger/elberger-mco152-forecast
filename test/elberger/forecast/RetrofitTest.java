@@ -26,7 +26,7 @@ class RetrofitTest
 		ForecastService service = retrofit.create(ForecastService.class);
 		
 		//when 
-		Call<ForecastFeedModel> call = service.addToUrl("07208", "c62a04efaf47575752e10468810ee065");
+		Call<ForecastFeedModel> call = service.getWeatherByZip("07208");
 		Response<ForecastFeedModel> response = call.execute();
 		
 		//then

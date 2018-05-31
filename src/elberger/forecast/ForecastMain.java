@@ -14,13 +14,11 @@ public class ForecastMain
 	
 	public int getTemp_min()
 	{
-		double fahrTemp = temp_min * 1.8 - 459.67;
-		return (int) Math.round(fahrTemp);
+		return (int) Math.round(temp_min);
 	}
 	
 	public int getTemp_max()
 	{
-		double fahrTemp = temp_max * 1.8 - 459.67;
-		return (int) Math.round(fahrTemp);
+		return (int) Math.round(temp_max);
 	}
 }
