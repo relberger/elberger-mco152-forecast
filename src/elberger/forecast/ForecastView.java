@@ -1,7 +1,8 @@
 package elberger.forecast;
 
 import java.awt.*;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -18,7 +19,8 @@ public class ForecastView extends JFrame
 	{
 		setTitle("Weather");
 		setSize(900, 200);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);		
+		weatherPanels = new ArrayList<WeatherPanel>(); 
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
@@ -29,24 +31,18 @@ public class ForecastView extends JFrame
 		JLabel enterZip = new JLabel("Enter zip code for weather in the next 24 hours: ");
 		userZip = new JTextField();
 		JButton search = new JButton("Search");
+
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("http://api.openweathermap.org")
+				.addConverterFactory(GsonConverterFactory.create())
+				.build();
+		
+		ForecastService service = retrofit.create(ForecastService.class);
+		ForecastController controller = new ForecastController(this, service);
 		
 		search.addActionListener(e ->
 		{
-			Retrofit retrofit = new Retrofit.Builder()
-					.baseUrl("http://api.openweathermap.org")
-					.addConverterFactory(GsonConverterFactory.create())
-					.build();
-			
-			ForecastService service = retrofit.create(ForecastService.class);
-			ForecastController controller = new ForecastController(this, service);
 			controller.requestForecast();
-			/*try
-			{
-				controller.zipValidation();
-			} catch (IOException e1)
-			{
-				e1.printStackTrace();
-			}*/ 
 		});
 		
 		zipPanel.add(enterZip);
@@ -57,8 +53,6 @@ public class ForecastView extends JFrame
 		JPanel hourlyWeather = new JPanel();
 		hourlyWeather.setLayout(new GridLayout(1,8));
 		
-		weatherPanels = new ArrayList<WeatherPanel>(); 
-		
 		for (int i = 0; i < 8; i++)
 		{
 			WeatherPanel weather = new WeatherPanel();
@@ -67,10 +61,36 @@ public class ForecastView extends JFrame
 		}
 		
 		panel.add(hourlyWeather, BorderLayout.CENTER);
-		
 		add(panel);
-	}
 
+	}
+	
+	public void invalidZipDialog()
+	{
+		JDialog invalidZip = new JDialog(this, "Invalid zip code", true);
+		invalidZip.setSize(200, 100);
+		invalidZip.setLocationRelativeTo(this);
+		
+		JLabel enterValid = new JLabel("Please enter a valid zip code");
+		JButton closeButton = new JButton("OK");
+
+		invalidZip.getContentPane().add(enterValid, BorderLayout.CENTER);
+		invalidZip.getContentPane().add(closeButton, BorderLayout.SOUTH);
+				
+		closeButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				invalidZip.dispose();
+			}
+		});
+		
+		userZip.setText("");
+				
+		invalidZip.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		invalidZip.setVisible(true);
+	}
+	
 	public String getUserZip()
 	{
 		return userZip.getText();

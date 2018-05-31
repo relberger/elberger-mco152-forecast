@@ -37,9 +37,12 @@ public class ForecastController
 						{
 							if(response.errorBody() != null)
 							{
-								view.getUserZipField().setText("Please enter a valid zip code");
+								view.invalidZipDialog();
 							}
-							showForecast(feed);
+							else 
+							{
+								showForecast(feed);
+							}
 						} catch (MalformedURLException e)
 						{
 							e.printStackTrace();
