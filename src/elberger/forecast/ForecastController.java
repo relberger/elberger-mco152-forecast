@@ -16,16 +16,17 @@ public class ForecastController
 {
 	private ForecastView view;
 	private ForecastService service;
+	private List<WeatherPanel> weatherPanels;
 	
 	public ForecastController(ForecastView view, ForecastService service)
 	{
 		super();
 		this.view = view;
 		this.service = service;
+		this.weatherPanels = view.getWeatherPanels();
 	}
 	
-	public void requestForecastFeed(int ii, Call <ForecastFeedModel> call, JLabel time, JLabel icon, JLabel desc,
-									JLabel high, JLabel low)
+	public void requestForecastFeed(Call <ForecastFeedModel> call)
 	{
 		call.enqueue(new Callback<ForecastFeedModel>()
 				{
@@ -36,7 +37,7 @@ public class ForecastController
 						
 						try
 						{
-							showForecast(ii, feed, time, icon, desc, high, low);
+							showForecast(feed);
 						} catch (MalformedURLException e)
 						{
 							e.printStackTrace();
@@ -53,64 +54,58 @@ public class ForecastController
 	
 	public void requestForecast()
 	{
-		List<WeatherPanel> weatherPanel = view.getWeatherPanel();
-				
-		requestForecastFeed(0, service.getWeatherByZip(view.getUserZip()), weatherPanel.get(0).getTime(),
-				weatherPanel.get(0).getIcon(), weatherPanel.get(0).getDesc(), weatherPanel.get(0).getHigh(),
-				weatherPanel.get(0).getLow());
-		requestForecastFeed(1, service.getWeatherByZip(view.getUserZip()), weatherPanel.get(1).getTime(),
-				weatherPanel.get(1).getIcon(), weatherPanel.get(1).getDesc(), weatherPanel.get(1).getHigh(),
-				weatherPanel.get(1).getLow());
-
+		requestForecastFeed(service.getWeatherByZip(view.getUserZip()));			
 	}	
 	
-	void showForecast(int ii, ForecastFeedModel feed, JLabel time, JLabel icon, JLabel desc, JLabel high, JLabel low) throws MalformedURLException
+	void showForecast(ForecastFeedModel feed) 
+			throws MalformedURLException
 	{
-		for(int ix = 0; ix < 8; ix++)
+		for(int ix = 0; ix < weatherPanels.size(); ix++)
 		{
 			List<Forecast> info = feed.getList();
 			
-			String timeStamp = info.get(ii).getDt_txt();
+			Forecast forecast = info.get(ix);
+			String timeStamp = forecast.getDt_txt();
 			String timeStampSplit[] = timeStamp.split(" " , 2);
 			String fullTime = timeStampSplit[1];
 			String[] timeSplit = fullTime.split(":", 3); 
 			int hour = Integer.parseInt(timeSplit[0]);
 			if (hour == 12)
 			{
-				time.setText("12" + ":" + timeSplit[1] + " PM");						
+				weatherPanels.get(ix).getTime().setText("12" + ":" + timeSplit[1] + " PM");						
 			}
 			else if (hour == 0)
 			{
-				time.setText("12" + ":" + timeSplit[1] + " AM");			
+				weatherPanels.get(ix).getTime().setText("12" + ":" + timeSplit[1] + " AM");			
 			}
 			else if (hour < 12)
 			{
 				String hr = timeSplit[0];
 				String[] hourSplit = hr.split("0", 2);
-				time.setText(hourSplit[1] + ":" + timeSplit[1] + " AM");
+				weatherPanels.get(ix).getTime().setText(hourSplit[1] + ":" + timeSplit[1] + " AM");
 			}
 			else if (hour > 12)
 			{
 				int hr = Integer.parseInt(timeSplit[0]) - 12;
 				timeSplit[0] = String.valueOf(hr);
-				time.setText(timeSplit[0] + ":" + timeSplit[1] + " PM");
+				weatherPanels.get(ix).getTime().setText(timeSplit[0] + ":" + timeSplit[1] + " PM");
 			}
 
-			ForecastWeather weather[] = info.get(ii).getWeather();
+			ForecastWeather weather[] = forecast.getWeather();
 			
 			URL iconUrl = new URL("http://openweathermap.org/img/w/" + weather[0].getIcon() + ".png");
 			ImageIcon image = new ImageIcon(iconUrl);
-			icon.setIcon(image);
+			weatherPanels.get(ix).getIcon().setIcon(image);
 			
-			desc.setText(weather[0].getDescription());
+			weatherPanels.get(ix).getDesc().setText(weather[0].getDescription());
 			
-			high.setText("High: " + String.valueOf(info.get(ii).getMain().getTemp_max()) + "°F");
+			weatherPanels.get(ix).getHigh().setText("High: " + String.valueOf(forecast.getMain().getTemp_max()) + "°F");
 			
-			low.setText("Low: " + String.valueOf(info.get(ii).getMain().getTemp_min()) + "°F");
+			weatherPanels.get(ix).getLow().setText("Low: " + String.valueOf(forecast.getMain().getTemp_min()) + "°F");
 		}
 	}
 	
-	public void zipValidation() throws IOException
+/*	public void zipValidation() throws IOException
 	{
 		Call <ForecastFeedModel> call = service.getWeatherByZip(view.getUserZip());
 		Response<ForecastFeedModel> response = call.execute();
@@ -124,7 +119,7 @@ public class ForecastController
 
 	private void clearAllFields()
 	{
-		List<WeatherPanel> weatherPanel = view.getWeatherPanel();
+		List<WeatherPanel> weatherPanel = view.getWeatherPanels();
 		weatherPanel.clear();
-	}
+	}*/
 }

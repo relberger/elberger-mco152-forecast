@@ -15,18 +15,18 @@ public class WeatherPanel extends JPanel
 	
 	public WeatherPanel()
 	{
-		JPanel hourly = new JPanel();
-		hourly.setLayout(new BoxLayout(hourly, BoxLayout.Y_AXIS));
-		time = new JLabel();
-		icon = new JLabel();
-		desc = new JLabel();
-		high = new JLabel();
-		low = new JLabel();
-		hourly.add(time);
-		hourly.add(icon);
-		hourly.add(desc);
-		hourly.add(high);
-		hourly.add(low);
+		this.time = new JLabel();
+		this.icon = new JLabel();
+		this.desc = new JLabel();
+		this.high = new JLabel();
+		this.low = new JLabel();
+		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.add(time);
+		this.add(icon);
+		this.add(desc);
+		this.add(high);
+		this.add(low);
 	}
 	
 	public JLabel getTime()
